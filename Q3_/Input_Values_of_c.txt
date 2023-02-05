@@ -1,0 +1,5 @@
+// Values of c in Ns/m:
+5
+40
+200
+

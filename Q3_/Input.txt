@@ -1,0 +1,17 @@
+// mass (m) in kg
+20
+// spring constant (k) in N/m
+20
+// Time Interval 0 <= r <= 15s
+//Interval starts at:
+0.0
+//Interval ends at:
+15
+// Time step (dt):
+0.03125
+// Value of c in Ns/m:
+// See the "Input_Values_of_c.txt"
+// Boundary Condition: x(t=0) = 1m
+1
+// Boundary Condition: x'(0) = 0 m/s
+0

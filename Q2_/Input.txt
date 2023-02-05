@@ -1,0 +1,9 @@
+// Interval 0 <= r <= 1
+//Interval starts at:
+0.0
+//Interval ends at:
+2.0
+// Value of Step_size:
+// See the Input_Values_of_Step_size.txt
+// Initial Condition: y(0) = 1
+1

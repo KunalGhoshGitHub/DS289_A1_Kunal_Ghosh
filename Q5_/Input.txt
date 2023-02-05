@@ -1,0 +1,13 @@
+// Number of grid points
+1024
+// Interval 0 <= r <= 1
+//Interval starts at:
+0.0
+//Interval ends at:
+1.0
+// Value of S:
+// See the Input_Values_of_S.txt
+// Boundary Condition: T (r = 1) = 1
+1
+// Boundary Condition: dT /dr at (r = 0) = 0
+0

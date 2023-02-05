@@ -1,0 +1,22 @@
+# depslib dependency file v1.0
+1675629066 source:/home/kunal/Downloads/IISc/Sem_2/NSDE/CODES/Assignment_1/Q5_/main.cpp
+	<iostream>
+	<vector>
+	<fstream>
+	<cmath>
+	<string>
+	<unistd.h>
+	<functional>
+	"DS289.h"
+
+1675627182 /home/kunal/Downloads/IISc/Sem_2/NSDE/CODES/Assignment_1/Q5_/DS289.h
+	<algorithm>
+	<iostream>
+	<vector>
+	<fstream>
+	<cmath>
+	<string>
+	<unistd.h>
+	<functional>
+	<cassert>
+
