@@ -27,6 +27,20 @@ void t_interval(vector<real> &t, real dt, real T0, real T)
     }
 }
 
+// This function calculates the error between the analytical solution and numerical solution
+// void Error(vector<real> &Analytical_Solution,vector<real> &Numerical_Solution,vector<real> &Error)
+void Error(vector<real> &Analytical_T,vector<real> &Numerical_Solution,vector<real> &Error_T)
+{
+    // Just checking if the size of the analytical solution and numerical solution vectors are same or not
+    // assert(Analytical_T.size() == Numerical_Solution.size());
+
+    for(int i = 0;i < Analytical_T.size();i++)
+    {
+        // Appending the Error vector
+        Error_T.push_back(abs(Analytical_T[i] - Numerical_Solution[i]));
+    }
+}
+
 // adam(vector<real> &sol, vector<real> &t, function<double(real, real)> func) solves 1st order ODE
 // sol = solution vector
 // t = vector corresponding to the grid points
@@ -45,7 +59,7 @@ void adam(vector<real> &sol, vector<real> &t, function<double(real, real)> func)
 
         // Scheme of the second-order Adams-Bashforth method
         // y_(i) = y(i-1) + (3*dt*(y'(i-1))/2) - (dt*(y'(i-2))/2)
-        sol[i] = sol[i-1] + (3*dt*func(sol[i-1],t[i-1])/2) - (dt*func(sol[i-2],t[i-2])/2);
+        sol[i] = sol[i-1] + (3.0*dt*func(sol[i-1],t[i-1])/2.0) - (dt*func(sol[i-2],t[i-2])/2.0);
     }
 }
 
@@ -96,16 +110,16 @@ void RK4(vector<real> &sol, vector<real> &t, function<double(real, real)> func)
         K1 = dt*func(sol[i-1],t[i-1]);
 
         // K2 = dt*(y'(y(i-1) + (dt*K1/2),t(i-1) + (dt/2)))
-        K2 = dt*func(sol[i-1] + (K1*(1/2)),t[i-1] + (dt*1/2));
+        K2 = dt*func(sol[i-1] + (K1*(1.0/2.0)),t[i-1] + (dt*(1.0/2.0)));
 
         // K3 = dt*(y'(y(i-1) + (dt*K2/2),t(i-1) + (dt/2)))
-        K3 = dt*func(sol[i-1] + (K2*(1/2)),t[i-1] + (dt*1/2));
+        K3 = dt*func(sol[i-1] + (K2*(1.0/2.0)),t[i-1] + (dt*(1.0/2.0)));
 
         // K4 = dt*(y'(y(i-1) + (dt*K3),t(i-1) + (dt)))
         K4 = dt*func(sol[i-1] + K3,t[i-1] + (dt));
 
         // y(i) = y(i-1) + ((1.0/6.0)*(K1 + (2*K2) + (2*K3) + K4))
-        sol[i] = sol[i-1] + (K1/6)+ (K2/3)+ (K3/3)+ (K4/6);
+        sol[i] = sol[i-1] + (K1/6.0)+ (K2/3.0)+ (K3/3.0)+ (K4/6.0);
     }
 }
 
@@ -138,16 +152,16 @@ void RK4(vector<real> &sol1, vector<real> &sol2, vector<real> &t, function<real(
         K12 = dt*func2(sol1[i-1],sol2[i-1],c,m,k);
 
         // K21 = dt*(y1'(y1(i-1) + (K11/2), y2(i-1) + (K12/2), t(i-1)+(dt/2)))
-        K21 = dt*func1(sol2[i-1] + (K12*(1/2)));
+        K21 = dt*func1(sol2[i-1] + (K12*(1.0/2.0)));
 
         // K22 = dt*(y2'(y1(i-1) + (K11/2), y2(i-1) + (K12/2), t(i-1)+(dt/2)))
-        K22 = dt*func2(sol1[i-1] + (K11*(1/2)), sol2[i-1] + (K12*(1/2)), c, m, k);
+        K22 = dt*func2(sol1[i-1] + (K11*(1.0/2.0)), sol2[i-1] + (K12*(1.0/2.0)), c, m, k);
 
         // K31 = dt*(y1'(y1(i-1) + (K21/2), y2(i-1) + (K22/2), t(i-1)+(dt/2)))
-        K31 = dt*func1(sol2[i-1] + (K22*(1/2)));
+        K31 = dt*func1(sol2[i-1] + (K22*(1.0/2.0)));
 
         // K32 = dt*(y2'(y1(i-1) + (K21/2), y2(i-1) + (K22/2), t(i-1)+(dt/2)))
-        K32 = dt*func2(sol1[i-1] + (K21*(1/2)), sol2[i-1] + (K22*(1/2)), c, m, k);
+        K32 = dt*func2(sol1[i-1] + (K21*(1.0/2.0)), sol2[i-1] + (K22*(1.0/2.0)), c, m, k);
 
         // K41 = dt*(y1'(y1(i-1) + (K31), y2(i-1) + (K32), t(i-1)+(dt)))
         K41 = dt*func1(sol2[i-1] + K32);
@@ -156,7 +170,7 @@ void RK4(vector<real> &sol1, vector<real> &sol2, vector<real> &t, function<real(
         K42 = dt*func2(sol1[i-1] + K31,sol2[i-1] + K32,c,m,k);
 
         // y1(i) = y1(i-1) + (K11/6)+ (K21/3)+ (K31/3)+ (K41/6)
-        sol1[i] = sol1[i-1] + (K11/6)+ (K21/3)+ (K31/3)+ (K41/6);
+        sol1[i] = sol1[i-1] + (K11/6.0)+ (K21/3.0)+ (K31/3.0)+ (K41/6.0);
 
         // y2(i) = y2(i-1) + (K12/6)+ (K22/3)+ (K32/3)+ (K42/6)
         sol2[i] = sol2[i-1] + (K12/6)+ (K22/3)+ (K32/3)+ (K42/6);
@@ -341,3 +355,4 @@ vector<real> input_parameters(string file_name)
 }
 
 #endif
+

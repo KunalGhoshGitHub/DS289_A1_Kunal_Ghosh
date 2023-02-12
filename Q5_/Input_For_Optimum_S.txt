@@ -1,0 +1,8 @@
+//Interval starts at (S_0):
+100.00
+//Interval ends at (S_n):
+500.00
+// Value of Step size:
+0.01
+// Required temperature:
+100

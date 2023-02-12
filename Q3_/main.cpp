@@ -109,6 +109,59 @@ int main()
         Output_file_names.push_back("Q3_RK4_2_Solution_c_"+to_string(c)+".csv");
     }
 
+    real Tol;
+    Tol = 0.5;
+
+    // RK4(sol1_RK4,sol2_RK4,t_RK4, &x_prime,&y_prime,c,m,k);
+    // This for loop will iterate over different values of the step_size(s)
+
+    c = 5.0;
+    vector<real> d_t;
+
+    dt = 1.0;
+    real avg_error1, Previous_avg_error;
+    for(int i= 0;i<10;i++)
+    {
+        dt = dt/2.0;
+
+        d_t.push_back(dt);
+
+        cout<<d_t[i]<<endl;
+        //cout<<"Average Error: "<<avg_error_vector(sol1_RK4,Previous_Sol1)<<endl;
+        num_interval_RK4 = int((T-T0)/d_t[i]);
+
+        num_RK4_grid_points = num_interval_RK4+1;
+
+        // t_RK4 = Location of the grid point
+        vector<real> t_RK4(num_RK4_grid_points),sol1_RK4(num_RK4_grid_points),sol2_RK4(num_RK4_grid_points),Previous_Sol1(num_RK4_grid_points);
+
+        // Initial condition
+
+        // Boundary Condition: x(t=0) = 1m
+        sol1_RK4[0] = input[5];
+
+        // Boundary Condition: x'(0) = 0 m/s
+        sol2_RK4[0] = input[6];
+
+        t_interval(t_RK4,d_t[i],T0,T);
+        // Function RK4 solves the ODE using RK4 method for 2 variables
+        RK4(sol1_RK4,sol2_RK4,t_RK4, &x_prime,&y_prime,c,m,k);
+
+        // Writes the numerical solutions for 2 variables using RK4 method at different grid point location in a file
+        write_to_file(sol1_RK4,"Q3_RK4_1Solution_dt_"+to_string(d_t[i])+".csv");
+        write_to_file(sol2_RK4,"Q3_RK4_2Solution_dt_"+to_string(d_t[i])+".csv");
+
+        Output_file_names.push_back("Q3_RK4_1Solution_dt_"+to_string(d_t[i])+".csv");
+        Output_file_names.push_back("Q3_RK4_2Solution_dt_"+to_string(d_t[i])+".csv");
+
+        //Previous_Sol1 = sol1_RK4;
+
+        //avg_error1 = avg_error_vector(sol1_RK4,Previous_Sol1);
+    }
+
+    write_to_file(d_t,"Values_of_dt.csv");
+    Output_file_names.push_back("Values_of_dt.csv");
+
     write_to_file(Output_file_names,"Output_file_names.csv");
 
     return 0;

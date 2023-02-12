@@ -30,6 +30,7 @@ void analytical_solution_y(vector<real> &sol,vector<real> &t)
     }
 }
 
+
 int main()
 {
     // dt = Time Step
@@ -53,6 +54,15 @@ int main()
     T0 = input[0];
     T = input[1];
     y0 = input[2];
+
+    // Vectors corresponding to average error and max error for explicit euler method
+    vector<real> Average_Error_Euler_Explicit,Max_Error_Euler_Explicit;
+
+    // Vectors corresponding to average error and max error for second-order Adams-Bashforth method
+    vector<real> Average_Error_Adam,Max_Error_Adam;
+
+    // Vectors corresponding to average error and max error for RK4 method
+    vector<real> Average_Error_RK4,Max_Error_RK4;
 
     // This for loop will iterate over different values of the step size(s)
     for (int i = 0;i<Values_of_Step_size.size();i++)
@@ -125,26 +135,13 @@ int main()
 
         Output_file_names.push_back("Q2_b_i_Euler_Explicit_Solution_Step_Size_"+to_string(dt)+".csv");
 
-        // Vectors corresponding to average error and max error for explicit euler method
-        vector<real> Average_Error_Euler_Explicit,Max_Error_Euler_Explicit;
-
         // Function avg_error_vector(analytical_sol,numerical_sol)
         // Calculates the average error between the analytical solution and numerical solution
         Average_Error_Euler_Explicit.push_back(avg_error_vector(analytical_sol_y,sol_euler));
 
-        // Writes the average error in a file
-        write_to_file(Average_Error_Euler_Explicit,"Q2_c_Average_error_Euler_Explicit_Solution_Step_Size_"+to_string(dt)+".csv");
-
-        Output_file_names.push_back("Q2_c_Average_error_Euler_Explicit_Solution_Step_Size_"+to_string(dt)+".csv");
-
         // Function max_error_vector(analytical_sol,numerical_sol)
         // Calculates the max error between the analytical solution and numerical solution
         Max_Error_Euler_Explicit.push_back(max_error_vector(analytical_sol_y,sol_euler));
-
-        // Writes the max error in a file
-        write_to_file(Max_Error_Euler_Explicit,"Q2_c_Max_Error_Euler_Explicit_Solution_Step_Size_"+to_string(dt)+".csv");
-
-        Output_file_names.push_back("Q2_c_Max_Error_Euler_Explicit_Solution_Step_Size_"+to_string(dt)+".csv");
 
         // num_interval_Adam = Number of intervals for the second-order Adams-Bashforth method
         // num_Adam_grid_points = Number of grid points for the second-order Adams-Bashforth method
@@ -182,26 +179,14 @@ int main()
         write_to_file(sol_Adam,"Q2_b_ii_Adam_Solution_Step_Size_"+to_string(dt)+".csv");
 
         Output_file_names.push_back("Q2_b_ii_Adam_Solution_Step_Size_"+to_string(dt)+".csv");
-        // Vectors corresponding to average error and max error for second-order Adams-Bashforth method
-        vector<real> Average_Error_Adam,Max_Error_Adam;
 
         // Function avg_error_vector(analytical_sol,numerical_sol)
         // Calculates the average error between the analytical solution and numerical solution
         Average_Error_Adam.push_back(avg_error_vector(analytical_sol_y,sol_Adam));
 
-        // Writes the average error in a file
-        write_to_file(Average_Error_Adam,"Q2_c_Average_error_Adam_Solution_Step_Size_"+to_string(dt)+".csv");
-
-        Output_file_names.push_back("Q2_c_Average_error_Adam_Solution_Step_Size_"+to_string(dt)+".csv");
-
         // Function max_error_vector(analytical_sol,numerical_sol)
         // Calculates the max error between the analytical solution and numerical solution
         Max_Error_Adam.push_back(max_error_vector(analytical_sol_y,sol_Adam));
-
-        // Writes the max error in a file
-        write_to_file(Max_Error_Adam,"Q2_c_Max_Error_Adam_Solution_Step_Size_"+to_string(dt)+".csv");
-
-        Output_file_names.push_back("Q2_c_Max_Error_Adam_Solution_Step_Size_"+to_string(dt)+".csv");
 
         // num_interval_RK4 = Number of intervals for the RK4 method
         // num_RK4_grid_points = Number of grid points for the RK4 method
@@ -237,29 +222,48 @@ int main()
 
         Output_file_names.push_back("Q2_b_iii_RK4_Solution_Step_Size_"+to_string(dt)+".csv");
 
-        // Vectors corresponding to average error and max error for RK4 method
-        vector<real> Average_Error_RK4,Max_Error_RK4;
-
         // Function avg_error_vector(analytical_sol,numerical_sol)
         // Calculates the average error between the analytical solution and numerical solution
         Average_Error_RK4.push_back(avg_error_vector(analytical_sol_y,sol_RK4));
 
-        // Writes the average error in a file
-        write_to_file(Average_Error_RK4,"Q2_c_Average_error_RK4_Solution_Step_Size_"+to_string(dt)+".csv");
-
-        Output_file_names.push_back("Q2_c_Average_error_RK4_Solution_Step_Size_"+to_string(dt)+".csv");
-
         // Function max_error_vector(analytical_sol,numerical_sol)
         // Calculates the max error between the analytical solution and numerical solution
         Max_Error_RK4.push_back(max_error_vector(analytical_sol_y,sol_RK4));
-
-        // Writes the max error in a file
-        write_to_file(Max_Error_RK4,"Q2_c_Max_Error_RK4_Solution_Step_Size_"+to_string(dt)+".csv");
-
-        Output_file_names.push_back("Q2_c_Max_Error_RK4_Solution_Step_Size_"+to_string(dt)+".csv");
-
-        write_to_file(Output_file_names,"Output_file_names.csv");
     }
+
+    // Writes the average error in a file
+    write_to_file(Average_Error_Euler_Explicit,"Q2_c_Average_error_Euler_Explicit_Solution.csv");
+
+    Output_file_names.push_back("Q2_c_Average_error_Euler_Explicit_Solution.csv");
+
+    // Writes the max error in a file
+    write_to_file(Max_Error_Euler_Explicit,"Q2_c_Max_Error_Euler_Explicit_Solution.csv");
+
+    Output_file_names.push_back("Q2_c_Max_Error_Euler_Explicit_Solution.csv");
+
+
+    // Writes the average error in a file
+    write_to_file(Average_Error_Adam,"Q2_c_Average_error_Adam_Solution.csv");
+
+    Output_file_names.push_back("Q2_c_Average_error_Adam_Solution.csv");
+
+    // Writes the max error in a file
+    write_to_file(Max_Error_Adam,"Q2_c_Max_Error_Adam_Solution.csv");
+
+    Output_file_names.push_back("Q2_c_Max_Error_Adam_Solution.csv");
+
+
+    // Writes the average error in a file
+    write_to_file(Average_Error_RK4,"Q2_c_Average_error_RK4_Solution.csv");
+
+    Output_file_names.push_back("Q2_c_Average_error_RK4_Solution.csv");
+
+    // Writes the max error in a file
+    write_to_file(Max_Error_RK4,"Q2_c_Max_Error_RK4_Solution.csv");
+
+    Output_file_names.push_back("Q2_c_Max_Error_RK4_Solution.csv");
+
+    write_to_file(Output_file_names,"Output_file_names.csv");
 
     return 0;
 }
