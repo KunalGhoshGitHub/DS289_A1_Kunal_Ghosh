@@ -1,0 +1,46 @@
+# PLEASE RUN THE CODE INSIDE AN EMPTY FOLDER TO AVOID ANY CONFLICTS
+
+# Code:
+"Q3.cpp"
+
+# Input files:
+"Input.txt"
+"Input_Values_of_c.txt"
+"Values_of_step_size.txt"
+Whenever, an output file in opened and closed it will be displayed in the terminal.
+(NOTE: In the input files, lines starting with "//" are comments. Do NOT change the order of the variables in the input files)
+
+# Output files:
+Refer to "Output_file_names.csv"
+All the output files will be generated in .csv format
+Whenever, an output file in opened and closed it will be displayed in the terminal.
+(Output file names are stored in a separate file because we are using step size in naming them. So, the number of trailing zeroes might vary depending on the system configuration.)
+(CAUTION: Any file of same name present in the folder will be overwritten.)
+
+# To compile the code:
+make 
+
+# To execute the code:
+make execute
+
+# To delete the generated files:
+make clean
+(CAUTION: It will remove all the .csv files from the folder.)
+
+# To delete the object file:
+make clean_object_file
+
+# Make file:
+"MakeFile"
+(NOTE: "MakeFile" is same for all the questions)
+
+# Header files:
+"DS289.h"
+(NOTE: "DS289.h" is same for all the questions)
+
+# Image files:
+All the image files will be generated in .png format
+
+# Post-processing file:
+"Post_processing.ipynb"
+(NOTE: Post-processing is done in Jupyter-Notebook using Python 3.9.13)

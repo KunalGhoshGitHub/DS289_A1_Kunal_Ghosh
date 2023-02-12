@@ -19,7 +19,7 @@ void euler_implicit(vector<real> &sol, vector<real> &x)
     for (int i = 1;i < x.size();i++)
     {
         dx = (x[i] - x[i-1]);
-        sol[i] = (sol[i-1] + (dx*(199999*exp(-x[i]))))/(1 + (200000*dx));
+        sol[i] = (sol[i-1] + (dx*(199999*exp(-x[i]))))/(1 + (dx*(200000)));
     }
 }
 
@@ -37,6 +37,9 @@ int main()
 
     // Vector to read from the input files
     vector<real> input;
+
+    // Vector to store the names of all the output files generated
+    vector<string> Output_file_names;
 
     // "Input.txt" has all the parameters
     input = input_parameters("Input.txt");
@@ -70,8 +73,14 @@ int main()
     // Writes the grid point location in a file
     write_to_file(t_euler,"Q4_b_Grid_Points_Euler_Implicit_Solution.csv");
 
+    Output_file_names.push_back("Q4_b_Grid_Points_Euler_Implicit_Solution.csv");
+
     // Writes the numerical solution using implicit euler method at different grid point location in a file
     write_to_file(sol_euler,"Q4_b_Euler_Implicit_Solution.csv");
+
+    Output_file_names.push_back("Q4_b_Euler_Implicit_Solution.csv");
+
+    write_to_file(Output_file_names,"Output_file_names.csv");
 
     return 0;
 }

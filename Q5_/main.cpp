@@ -249,8 +249,6 @@ int main()
     auto int_result = std::max_element(S_req.begin(),S_req.end());
 
     // Getting the value of the maximum element in the vector
-    cout<<(*int_result)<<endl;
-
     S_optimum.push_back(*int_result);
 
     write_to_file(S_optimum,"Q_5_c_Optimum_S_"+to_string(T_req)+".csv");
